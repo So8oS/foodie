@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+   id           String        @id @default(uuid())
+  name           String?
+  image          String?
+  email          String?   @unique
+  bio            String?
+  emailVerified  DateTime?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  reviews      Review[]
+  followers    Follow[]  @relation("Followers")
+  following    Follow[]  @relation("Following")
+  notifications Notification[]
+  location     String?
+  dateOfBirth  DateTime?
+  userType     String    @default("user")
+  subscriptionLevel String?
+  lastLogin    DateTime?
+  
+}
+
+model Account {
+   id           String        @id @default(uuid())
+  userId            String  
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? 
+  access_token      String? 
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? 
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+
+
+model Restaurant {
+   id           String        @id @default(uuid())
+  name         String
+  address      String
+  cuisineType  String
+  openingHours String
+  averageRating Float
+  totalReviews Int
+  contactInfo  String
+  website      String?
+  reviews      Review[]
+  offers       Offer[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+   id           String        @id @default(uuid())
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  rating       Float
+  reviewText   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Offer {
+   id           String        @id @default(uuid())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  title        String
+  description  String
+  discountPercentage Float
+  startDate    DateTime
+  endDate      DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Follow {
+  id           String        @id @default(uuid())
+  followerUser   User  @relation("Followers", fields: [followerUserId], references: [id])
+  followerUserId String
+  followedUser   User  @relation("Following", fields: [followedUserId], references: [id])
+  followedUserId String
+  followDate     DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+
+model Notification {
+   id           String        @id @default(uuid())
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String
+  content      String
+  timestamp    DateTime
+  status       String    // Enum for read/unread
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+   id           String        @id @default(uuid())
+  sessionToken String   @unique
+  userId       String   
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+   id           String        @id @default(uuid())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

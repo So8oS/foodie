@@ -2,27 +2,19 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import Navbar from "@/components/navbar";
+import TopArt from "@/components/topArt";
 
 export default function Home() {
+  const { data: session } = useSession();
   return (
-    <div>
-      <div className="flex justify-between w-full">
-        <div className="flex">
-          <svg className="" xmlns="http://www.w3.org/2000/svg" width="50" height="75" viewBox="0 0 50 75" fill="none">
-            <circle cx="2" cy="27" r="30" stroke="#F45867" stroke-width="36" />
-          </svg>
-          <svg className="absolute " xmlns="http://www.w3.org/2000/svg" width="160" height="66" viewBox="0 0 160 66" fill="none">
-            <circle cx="77.5" cy="-16.5" r="82.5" fill="#FFECE7" />
-          </svg>
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="77" height="72" viewBox="0 0 77 72" fill="none">
-          <circle cx="90.5" cy="-18.5" r="90.5" fill="#F45867" />
-        </svg>
-      </div>
+    <div className="">
+      <TopArt />
       <div className="p-4">
-        <Navbar />
-        <Link href="/auth">Auth</Link>
-        <button onClick={() => signOut()}>Sign out</button>
+        {/* <Navbar /> */}
+        <div className="flex flex-col text-2xl gap-2 justify-center items-center mt-2">
+          <Link href="/auth">Auth</Link>
+          {session?.user && <button onClick={() => signOut({ callbackUrl: "/" })}>Sign out</button>}
+        </div>
       </div>
     </div>
   );

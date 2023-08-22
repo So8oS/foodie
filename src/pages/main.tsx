@@ -3,6 +3,7 @@ import React from "react";
 import { restaurants } from "./../components/resturants";
 import Navbar from "@/components/navbar";
 import { MdRateReview } from "react-icons/md";
+import { signOut } from "next-auth/react";
 
 const Main = () => {
   return (
@@ -24,6 +25,9 @@ const Main = () => {
           );
         })}
       </div>
+      <button className="p-2 w-52 rounded-lg shadow-2xl border border-slate-400 self-center text-[#F45867]" onClick={() => signOut({ callbackUrl: "/" })}>
+        Sign out
+      </button>
     </div>
   );
 };

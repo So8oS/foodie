@@ -12,7 +12,7 @@ datasource db {
 
 
 model User {
-   id           String        @id @default(uuid())
+   id            String        @id @default(uuid())
   name           String?
   image          String?
   email          String?   @unique
@@ -23,9 +23,9 @@ model User {
   updatedAt      DateTime  @updatedAt
   sessions       Session[]
   accounts       Account[]
-  reviews      Review[]
-  followers    Follow[]  @relation("Followers")
-  following    Follow[]  @relation("Following")
+  reviews        Review[]
+  followers      Follow[]  @relation("Followers")
+  following      Follow[]  @relation("Following")
   notifications Notification[]
   location     String?
   dateOfBirth  DateTime?
@@ -36,7 +36,7 @@ model User {
 }
 
 model Account {
-   id           String        @id @default(uuid())
+   id               String        @id @default(uuid())
   userId            String  
   type              String
   provider          String
@@ -58,6 +58,7 @@ model Account {
 model Restaurant {
    id           String        @id @default(uuid())
   name         String
+  image        String
   address      String
   cuisineType  String
   openingHours String
@@ -72,7 +73,7 @@ model Restaurant {
 }
 
 model Review {
-   id           String        @id @default(uuid())
+  id           String        @id @default(uuid())
   restaurant   Restaurant   @relation(fields: [restaurantId], references: [id])
   restaurantId String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)

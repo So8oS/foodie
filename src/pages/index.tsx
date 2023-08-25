@@ -20,7 +20,7 @@ export default function Home() {
               <Link className="p-2 w-52 rounded-lg shadow-2xl border border-slate-400  text-[#F45867] text-xl font-semibold  flex justify-center" href="/main">
                 Home Page
               </Link>
-              <Link className="p-2 w-52 rounded-lg shadow-2xl border border-slate-400  text-[#F45867] text-xl font-semibold  flex justify-center" href="/addrestaurent">
+              <Link className="p-2 w-52 rounded-lg shadow-2xl border border-slate-400  text-[#F45867] text-xl font-semibold  flex justify-center" href="/addrestaurant">
                 Add Restaurant
               </Link>
               <button className="p-2 w-52 rounded-lg shadow-2xl border border-slate-400 self-center text-[#F45867] text-xl font-semibold" onClick={() => signOut({ callbackUrl: "/" })}>

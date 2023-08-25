@@ -11,14 +11,14 @@ interface IFormInput {
   website: string;
 }
 
-const AddResturant = () => {
+const AddRestaurant = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const add = async (data: IFormInput) => {
+  // @ts-ignore
+  const add = async (data: IFormInput, e) => {
     await axios.post("/api/addResturant", {
       name: data.name,
       address: data.address,
@@ -27,6 +27,7 @@ const AddResturant = () => {
       contactInfo: data.contactInfo,
       website: data.website,
     });
+    e.target.reset();
   };
 
   return (
@@ -96,4 +97,4 @@ const AddResturant = () => {
   );
 };
 
-export default AddResturant;
+export default AddRestaurant;

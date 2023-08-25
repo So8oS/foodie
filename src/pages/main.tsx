@@ -36,17 +36,19 @@ const Main = () => {
           <div ref={scrollContainerRef} className="flex items-center gap-5 py-5 overflow-scroll">
             {/* Map over restaurants or show skeletons */}
             {restaurants?.data
-              ? restaurants.data.map((restaurant: Restaurant) => (
-                  <Link href={`/restaurant/${restaurant.id}`} key={restaurant.id} className="shadow-lg flex flex-col items-center justify-center rounded-2xl overflow-scroll min-w-fit pb-2">
-                    <img className="w-[19rem] h-[10rem] object-cover" src={restaurant.image} alt="" />
-                    <h1 className="self-start font-semibold pl-3">{restaurant.name}</h1>
-                    <h2>{restaurant.address}</h2>
-                    <div className="self-start pl-3 flex gap-1 justify-center items-center">
-                      <MdRateReview className="w-5 h-5" />
-                      <p>3</p>
-                    </div>
-                  </Link>
-                ))
+              ? restaurants.data
+                  .map((restaurant: Restaurant) => (
+                    <Link href={`/restaurant/${restaurant.id}`} key={restaurant.id} className="shadow-lg flex flex-col items-center justify-center rounded-2xl overflow-scroll min-w-fit pb-2">
+                      <img className="w-[19rem] h-[10rem] object-cover" src={restaurant.image} alt="" />
+                      <h1 className="self-start font-semibold pl-3">{restaurant.name}</h1>
+                      <h2>{restaurant.address}</h2>
+                      <div className="self-start pl-3 flex gap-1 justify-center items-center">
+                        <MdRateReview className="w-5 h-5" />
+                        <p>3</p>
+                      </div>
+                    </Link>
+                  ))
+                  .reverse()
               : // Show skeletons while loading data
                 restaurants?.isLoading && (
                   <>

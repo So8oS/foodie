@@ -15,6 +15,7 @@ const serverAuth = async (req: NextApiRequest) => {
       email: session.user.email,
     },
     select: {
+      id: true,
       email: true,
       name: true,
       image: true,

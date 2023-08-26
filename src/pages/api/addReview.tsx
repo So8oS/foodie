@@ -3,19 +3,16 @@ import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { name, address, cuisineType, openingHours, contactInfo, website, image } = req.body;
+    const { restaurantId, userId, rating, reviewText, image } = req.body;
+    console.log(req.body);
 
-    const restaurant = await prismadb.restaurant.create({
+    const review = await prismadb.review.create({
       data: {
-        name,
-        image,
-        address,
-        cuisineType,
-        openingHours,
-        contactInfo,
-        website,
-        averageRating: 0,
-        totalReviews: 0,
+        restaurantId,
+        userId,
+        rating: Number(rating),
+        reviewText,
+        video: image,
       },
     });
 

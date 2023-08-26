@@ -78,8 +78,9 @@ model Review {
   restaurantId String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
-  rating       Float
+  rating       Int
   reviewText   String
+  video     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -28,8 +28,8 @@ const Resturant = () => {
   const [image, setImage] = React.useState();
   const { register, handleSubmit } = useForm();
   const user = useCurrentUser();
-  const reviews = getReviews();
-  console.log(reviews.data);
+  // const reviews = getReviews();
+  console.log(user.data);
 
   const getRestaurant = async () => {
     try {
@@ -67,7 +67,7 @@ const Resturant = () => {
   return (
     <>
       <TopArt />
-      {restaurant && (
+      {restaurant ? (
         <div className="p-5 flex flex-col justify-center items-center ">
           {/* Componant */}
           <div className="flex flex-col justify-center ">
@@ -128,18 +128,23 @@ const Resturant = () => {
 
           <h1 className="text-3xl self-center font-bold mt-5">Reviews</h1>
           <div className="grid grid-cols-3 gap-2 mt-5 ">
-            {
+            {/* @ts-ignore */}
+            {restaurant?.reviews ? (
               //@ts-ignore
-              reviews.data.map((review) => {
+              restaurant.reviews.map((review) => {
                 return (
                   <>
-                    <video controls className="   " src={review.video} />
+                    <video controls className="" src={review.video} />
                   </>
                 );
               })
-            }
+            ) : (
+              <h1 className="text-[#F45867]">No Reviews</h1>
+            )}
           </div>
         </div>
+      ) : (
+        <h1>Loading...</h1>
       )}
     </>
   );

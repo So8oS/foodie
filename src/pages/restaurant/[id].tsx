@@ -66,7 +66,6 @@ const Resturant = () => {
 
   return (
     <>
-      <TopArt />
       {restaurant ? (
         <div className="p-5 flex flex-col justify-center items-center ">
           {/* Componant */}

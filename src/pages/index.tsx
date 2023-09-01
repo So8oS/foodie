@@ -8,7 +8,6 @@ export default function Home() {
   const { data: session } = useSession();
   return (
     <div className="">
-      <TopArt />
       <div className="p-4">
         {/* <Navbar /> */}
         <div className="flex flex-col justify-center items-center  text-2xl gap-2 mt-2">

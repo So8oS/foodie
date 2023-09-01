@@ -27,7 +27,6 @@ const Main = () => {
 
   return (
     <>
-      <TopArt />
       <div className="p-3 flex flex-col gap-3">
         <Navbar />
         <h1 className="self-start font-semibold text-2xl">Featured Restaurants</h1>

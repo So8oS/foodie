@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import { motion } from "framer-motion";
+import TopArt from "@/components/topArt";
 export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
 
@@ -22,12 +23,15 @@ export default function App({ Component, pageProps }: AppProps) {
           <Typewriter options={{ strings: ["Foodie"], autoStart: true }} />
         </div>
       ) : (
-        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
-          <SessionProvider session={pageProps.session}>
-            <Component {...pageProps} />
-            <Footer />
-          </SessionProvider>
-        </motion.div>
+        <>
+          <TopArt />
+          <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
+            <SessionProvider session={pageProps.session}>
+              <Component {...pageProps} />
+              <Footer />
+            </SessionProvider>
+          </motion.div>
+        </>
       )}
     </>
   );

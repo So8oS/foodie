@@ -37,7 +37,7 @@ const Main = () => {
             {restaurants?.data
               ? restaurants.data
                   .map((restaurant: Restaurant) => (
-                    <Link href={`/restaurant/${restaurant.id}`} key={restaurant.id} className="shadow-lg flex flex-col items-center justify-center rounded-2xl overflow-scroll min-w-fit pb-2">
+                    <Link href={`/restaurant/${restaurant.id}`} key={restaurant.id} className="shadow-lg flex flex-col items-center justify-center rounded-2xl overflow-scroll min-w-fit pb-2 ">
                       <img className="w-[19rem] h-[10rem] object-cover" src={restaurant.image} alt="" />
                       <h1 className="self-start font-semibold pl-3">{restaurant.name}</h1>
                       <h2>{restaurant.address}</h2>

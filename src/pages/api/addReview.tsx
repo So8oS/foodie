@@ -3,21 +3,38 @@ import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { restaurantId, userId, rating, reviewText, image } = req.body;
-    console.log(req.body);
+    try {
+      const { restaurantId, userId, rating, reviewText, image } = req.body;
 
-    const review = await prismadb.review.create({
-      data: {
-        restaurantId,
-        userId,
-        rating: Number(rating),
-        reviewText,
-        video: image,
-      },
-    });
+      if (!restaurantId || !userId || !rating || !reviewText) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
 
-    return res.status(200).json(200);
+      if (!image) {
+        return res.status(400).json({ message: "Upload A Video" });
+      }
+
+      const parsedRating = Number(rating);
+      if (isNaN(parsedRating) || parsedRating < 1 || parsedRating > 5) {
+        return res.status(400).json({ message: "Invalid rating value" });
+      }
+
+      const review = await prismadb.review.create({
+        data: {
+          restaurantId,
+          userId,
+          rating: parsedRating,
+          reviewText,
+          video: image,
+        },
+      });
+
+      return res.status(201).json({ message: "Review created successfully" });
+    } catch (error) {
+      console.error("Error creating review:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
   } else {
-    return res.status(405).json({ message: "An Error Has Happened" });
+    return res.status(405).json({ message: "Method Not Allowed" });
   }
 }

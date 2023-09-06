@@ -4,8 +4,14 @@
 
 body {
   font-family: "Kalam", cursive;
+  background-color: #f3f4f6;
+  /* background-color: #f8eeec; */
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+input {
+  background-color: "transparent";
 }

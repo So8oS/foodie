@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import Navbar from "@/components/navbar";
-import TopArt from "@/components/topArt";
 
 export default function Home() {
   const { data: session } = useSession();

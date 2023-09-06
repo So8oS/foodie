@@ -3,24 +3,37 @@ import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
-    const { name, address, cuisineType, openingHours, contactInfo, website, image } = req.body;
+    try {
+      const { name, address, cuisineType, openingHours, contactInfo, website, image } = req.body;
 
-    const restaurant = await prismadb.restaurant.create({
-      data: {
-        name,
-        image,
-        address,
-        cuisineType,
-        openingHours,
-        contactInfo,
-        website,
-        averageRating: 0,
-        totalReviews: 0,
-      },
-    });
+      if (!name || !address || !cuisineType || !openingHours || !contactInfo) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
 
-    return res.status(200).json(200);
+      if (!image) {
+        return res.status(400).json({ message: "Upload An Image" });
+      }
+
+      const restaurant = await prismadb.restaurant.create({
+        data: {
+          name,
+          image,
+          address,
+          cuisineType,
+          openingHours,
+          contactInfo,
+          website,
+          averageRating: 0,
+          totalReviews: 0,
+        },
+      });
+
+      return res.status(201).json({ message: "Restaurant created successfully" });
+    } catch (error) {
+      console.error("Error creating restaurant:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
   } else {
-    return res.status(405).json({ message: "An Error Has Happened" });
+    return res.status(405).json({ message: "Method Not Allowed" });
   }
 }

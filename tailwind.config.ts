@@ -16,9 +16,6 @@ const config: Config = {
       Slabo: ["Slabo 27px", "serif"],
       Kalam: ["Kalam", "cursive"],
     },
-    colors: {
-      default: "#F45867",
-    },
   },
   plugins: [],
 };

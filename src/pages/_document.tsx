@@ -11,6 +11,7 @@ export default function Document() {
       <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
       <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet" />
       <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet"></link>
+      <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"></link>
       <body>
         <Main />
         <NextScript />

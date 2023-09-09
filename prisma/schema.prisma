@@ -80,6 +80,7 @@ model Review {
   userId       String
   rating       Int
   reviewText   String
+  // likes        Int @default(0)
   video     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -7,6 +7,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       select: {
         id: true,
         video: true,
+        reviewText: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
       },
     });
 

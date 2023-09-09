@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </div>
       ) : (
         <>
-          <TopArt />
+          {/* <TopArt /> */}
           <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
             <SessionProvider session={pageProps.session}>
               <Component {...pageProps} />

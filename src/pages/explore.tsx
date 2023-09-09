@@ -12,14 +12,14 @@ const Explore = () => {
   console.log(reviews.data);
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="flex flex-col justify-center items-center ">
+    <div className="flex flex-col justify-center items-center ">
+      <div className="flex flex-col justify-center items-center mb-12 ">
         {/* @ts-ignore */}
         {reviews &&
           //@ts-ignore
           reviews?.data?.map((review) => {
             return (
-              <div key={review.id} className="flex flex-col  w-full">
+              <div key={review.id} className="flex flex-col  w-full ">
                 <div className="flex justify-between items-center bg-white p-2  ">
                   <div className="flex  justify-center items-center gap-3">
                     <img className="w-8 rounded-full" src={review.user.image} alt="" />
@@ -31,7 +31,7 @@ const Explore = () => {
                 <Video controls={["PlayPause", "Fullscreen"]}>
                   <source src={review.video} type="video/webm" />
                 </Video>
-                <div className="flex flex-col gap-3  bg-white p-2 border-t border-b border-slate-600 ">
+                <div className="flex flex-col gap-3  bg-white p-2  border-slate-600 ">
                   <div className="flex justify-between items-center ">
                     <BiHeart className="h-7 w-7" />
                     {/* <BsThreeDotsVertical className="h-7 w-7" /> */}
